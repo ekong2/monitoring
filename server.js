@@ -41,8 +41,24 @@ exec("wmic logicaldisk get Caption,FreeSpace,Size", function (e, out) {
   console.log(ret);
 });
 
+//processes ordered by memory usage in bytes
+exec("wmic process get Caption, WorkingSetSize", function (e,out){
+	var ret = [];
+	var results = out.trim().split('\n');
+	for (var i = 1; i < results.length; i++){
+		var check = results[i].split(/\s{2,}/)
+		var processName = check[0].trim();
+		var memory = check[1].trim();
+		ret.push({
+			processName: processName,
+			memory: memory
+		});
+	}
+	console.log(ret);
+});
+
 //system load + physical memory
-exec("wmic cpu get LoadPercentage", function(e, out){
+exec("wmic cpu get LoadPercentage", function (e, out){
 	exec("wmic os get FreePhysicalMemory,TotalVisibleMemorySize", function(e, outMem){
 		var ret = [];
 		var cpu = out.match(/\d+/)[0];
@@ -67,14 +83,5 @@ exec("wmic cpu get LoadPercentage", function(e, out){
 	});
 });
 
-//processes ordered by memory usage
-exec("tasklist /nh | sort /r /+65", function(e,out){
-	var ret = 'Processes by memory used\n';
-	console.log(ret, out);
-	// out.trim().split('\n').slice(0, 20).forEach(function(line){
-	// 	ret += line.substring(0, 25) + line.substring(64);
-	// });
-	// console.log(ret);
-});
 
 module.exports = app;
