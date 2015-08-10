@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Monitor Me</title>
+</head>
+
+<body>
+<h1>heya fingers crossed</h1>
+<script>
+$(function(){
+	var http = require('http');
+	var express = require('express');
+
+	var app = express();
+	app.set('view engine', 'html');
+	app.set('views', './views');
+	app.use(express.static(__dirname + '/views'));
+	require('./routes')(app);
+
+	var server = require('http').createServer(app);
+
+	var port = process.env.PORT || 8000;
+
+	//Start the server
+	server.listen(port, function() {
+	console.log('Server listening on port ' + port);
+	});
+});
+</script>
+</body>
+</html>

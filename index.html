@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link href="./view/css/styles.css" rel="stylesheet">
+    <script>
+        function bodyOnLoad(){
+            require('./server.js');
+            //TODO: change to be more generic
+            window.location.assign('http://localhost:8000/');
+        }
+    </script>
+    <title>Monitor Me</title>
+</head>
+
+<body onload="bodyOnLoad()">
+    <div class="spinner"></div>
+</body>
+</html>
