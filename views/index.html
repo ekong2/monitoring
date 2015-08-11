@@ -10,30 +10,35 @@
     <meta name="author" content="">
 
     <title>Monitor Me</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
+    <script src="js/app.js"></script>
 </head>
 
-<body>
-<h1>heya fingers crossed</h1>
-<script>
-$(function(){
-	var http = require('http');
-	var express = require('express');
+<body ng-app="main">
+	<h1>Basic computer information</h1>
+	<div ng-controller="info">
 
-	var app = express();
-	app.set('view engine', 'html');
-	app.set('views', './views');
-	app.use(express.static(__dirname + '/views'));
-	require('./routes')(app);
+		<h2>Disk information</h2>
+		<p>Total free space: {{disk.free}} bytes</p>
+		<p>Total used space: {{disk.used}} bytes</p>
+		<p>Total space: {{disk.total}} bytes</p>
 
-	var server = require('http').createServer(app);
+		<hr>
 
-	var port = process.env.PORT || 8000;
+		<h2>Memory information</h2>
+		<p>Amount of CPU used: {{processes.cpu.used}}%</p>
+		<p>Amount of idle CPU: {{processes.cpu.idle}}%</p>
+		<p>Physical memory used: {{processes.memory.used}} bytes, {{processes.memory.usedPercentage}} %</p>
+		<p>Physical memory available: {{processes.memory.free}} bytes, {{processes.memory.freePercentage}} %</p>
+		<p>Total Physical memory: {{processes.memory.total}} bytes</p>
 
-	//Start the server
-	server.listen(port, function() {
-	console.log('Server listening on port ' + port);
-	});
-});
-</script>
+		<hr>
+		<h2>Task List</h2>
+		<div ng-repeat="task in tasks">
+  			Name: {{task.processName}}, {{task.memory}} bytes
+		</div>
+
+	</div>
+
 </body>
 </html>
