@@ -34,9 +34,16 @@
 
 		<hr>
 		<h2>Task List</h2>
-		<div ng-repeat="task in tasks">
-  			Name: {{task.processName}}, {{task.memory}} bytes
-		</div>
+		<table class="tasks">
+		    <tr>
+		      <th>Name</th>
+		      <th>Memory</th>
+		    </tr>
+		    <tr ng-repeat="task in tasks | orderBy:'-memory'">
+		      <td>{{task.processName}}</td>
+		      <td>{{task.memory}} bytes</td>
+		    </tr>
+		  </table>
 
 	</div>
 
