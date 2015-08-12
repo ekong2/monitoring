@@ -12,6 +12,7 @@
     <title>Monitor Me</title>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
     <script src="js/app.js"></script>
+    <script src="js/filter.js"></script>
 </head>
 
 <body ng-app="main">
@@ -39,7 +40,7 @@
 		      <th>Name</th>
 		      <th>Memory</th>
 		    </tr>
-		    <tr ng-repeat="task in tasks | orderBy:'-memory'">
+		    <tr ng-repeat="task in tasks | memoryFilter:'memory':true">
 		      <td>{{task.processName}}</td>
 		      <td>{{task.memory}} bytes</td>
 		    </tr>

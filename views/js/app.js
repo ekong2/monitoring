@@ -1,4 +1,4 @@
-angular.module("main", [])
+angular.module("main", ['memoryFilter'])
  .controller("info", function($scope, $http, $timeout) {
     $scope.disk = {};
     $scope.processes = {};
@@ -24,7 +24,6 @@ angular.module("main", [])
 		$http.get('/tasks').
 		  then(function(response) {
 		  	$scope.tasks = response.data;
-		  	console.log($scope.tasks);
 		  }, function(response) {
 		  	//Error from the server
 		    console.log(response);
