@@ -19,8 +19,3 @@ Monitor the status of your computer
 
 This automated build process will create an executable file insde a "build" folder.
 Currently only windows is supported, more to come later.
-
-## Team
-Eddie Kong
-
-Philip Oh
