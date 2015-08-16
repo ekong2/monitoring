@@ -76,4 +76,28 @@ module.exports = function(app){
 		});
 	});
 
+	app.get('/diskMac', function(req,res){
+		var exec = require('child_process').exec;
+		//memory
+		$exec('df -lg | tail -n +2', function(e, out) {
+		      var results = []
+		      var disks = out.trim().split('\n')
+		    
+		      disks.forEach(function(disk) {
+		        if (!disk.match(/^\/dev/)){
+		        	return;
+		        }
+		    
+		        var info = disk.split(/\s+/);
+		        results.push({
+		          dev: info[0],
+		          used: parseInt(info[4]),
+		          mount: info[8]
+		        });
+		      });
+		    
+		      res.send(results)
+		});
+	});
+
 };
